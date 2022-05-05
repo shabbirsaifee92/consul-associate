@@ -10,3 +10,8 @@ variable "region" {
 variable "source_ip_addresses" {
   type = list(any)
 }
+
+variable "no_of_vms" {
+  type    = number
+  default = 1
+}

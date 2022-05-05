@@ -1,6 +1,8 @@
-resource "digitalocean_droplet" "server_1" {
+resource "digitalocean_droplet" "servers" {
+  count = var.no_of_vms
+
   image  = data.digitalocean_images.images.images[0].slug
-  name   = "server-1"
+  name   = "server-${count.index + 1}"
   region = var.region
   size   = "s-1vcpu-1gb"
   ssh_keys = [
@@ -9,10 +11,10 @@ resource "digitalocean_droplet" "server_1" {
   tags = var.common_labels
 }
 
-resource "digitalocean_firewall" "web" {
+resource "digitalocean_firewall" "firewall" {
   name = "consul-firewall"
 
-  droplet_ids = [digitalocean_droplet.server_1.id]
+  droplet_ids = digitalocean_droplet.servers[*].id
 
   inbound_rule {
     protocol         = "tcp"
