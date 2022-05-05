@@ -57,7 +57,7 @@ data "digitalocean_ssh_key" "consul_associate" {
 }
 
 output "server-publix-ip" {
-  value = digitalocean_droplet.server_1.ipv4_address
+  value = digitalocean_droplet.servers[*].ipv4_address
 }
 
 output "image" {
