@@ -19,13 +19,13 @@ resource "digitalocean_firewall" "firewall" {
   inbound_rule {
     protocol         = "tcp"
     port_range       = "1-65535"
-    source_addresses = var.source_ip_addresses
+    source_addresses = concat(var.source_ip_addresses, digitalocean_droplet.servers[*].ipv4_address)
   }
 
   inbound_rule {
     protocol         = "udp"
     port_range       = "1-65535"
-    source_addresses = var.source_ip_addresses
+    source_addresses = concat(var.source_ip_addresses, digitalocean_droplet.servers[*].ipv4_address)
   }
 
   outbound_rule {
