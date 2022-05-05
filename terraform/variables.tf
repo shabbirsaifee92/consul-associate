@@ -6,3 +6,7 @@ variable "common_labels" {
 variable "region" {
   type = string
 }
+
+variable "source_ip_addresses" {
+  type = list(any)
+}

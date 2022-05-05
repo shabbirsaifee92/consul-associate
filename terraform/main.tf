@@ -9,6 +9,36 @@ resource "digitalocean_droplet" "server_1" {
   tags = var.common_labels
 }
 
+resource "digitalocean_firewall" "web" {
+  name = "consul-firewall"
+
+  droplet_ids = [digitalocean_droplet.server_1.id]
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "1-65535"
+    source_addresses = var.source_ip_addresses
+  }
+
+  inbound_rule {
+    protocol         = "udp"
+    port_range       = "1-65535"
+    source_addresses = var.source_ip_addresses
+  }
+
+  outbound_rule {
+    protocol              = "udp"
+    port_range            = "53"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  outbound_rule {
+    protocol              = "tcp"
+    port_range            = "1-65535"
+    destination_addresses = ["0.0.0.0/0", "::/0"]
+  }
+}
+
 data "digitalocean_images" "images" {
   filter {
     key    = "distribution"
