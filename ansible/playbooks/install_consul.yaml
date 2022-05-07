@@ -1,0 +1,20 @@
+- hosts: all
+  user: ansible
+  become: True
+  tasks:
+    - name: Install yum-utils
+      yum:
+        name: yum-utils
+        state: present
+        update_cache: True
+    - name: Add consul repository
+      yum_repository: 
+        name: hashicorp
+        description: Add the official HashiCorp Linux repository
+        baseurl: https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+        state: present
+    - name: Install consul
+      yum:
+        name: consul
+        state: present
+        update_cache: True
