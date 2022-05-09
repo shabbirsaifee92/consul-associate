@@ -15,12 +15,12 @@
       yum:
         name: epel-release
         state: present
-        cache_update: True
+        update_cache: True
     - name: Install nginx
       yum:
         name: nginx
         state: present
-        cache_update: True    
+        update_cache: True    
     - name: Add consul repository
       shell: yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
     - name: Install consul
