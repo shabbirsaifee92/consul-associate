@@ -9,7 +9,7 @@ service {
 
   check {
     id = "backend-service-check"
-    http = "http://localhost:9080"
+    http = "http://127.0.0.1:9080"
     method = "GET"
     interval = "1s"
     timeout = "1s"

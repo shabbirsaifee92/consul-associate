@@ -17,7 +17,7 @@ service {
 
   check {
     id = "frontend-service-check"
-    http = "http://localhost:8080"
+    http = "http://127.0.0.1:8080"
     method = "GET"
     interval = "1s"
     timeout = "1s"
